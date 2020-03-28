@@ -62,19 +62,20 @@ Find a gist
                 }
 
                 $content = Get-Content $tmpOut
-                $obj = [pscustomobject] @{
-                    Id = $e.id
-                    Name = $filename
-                    Language = $language
-                    Content = $content
-                    Url = $e.html_url
-                    rawUrl = $rawUrl
-                    Public = $e.public
-                    CreatedAt = $e.created_at
-                    UpdatedAt = $e.updated_at
 
-                }
-                $resultSet.Add($obj) | Out-Null
+                $gistObj = [Gist]::new(
+                    [string]$e.Id,
+                    $filename,
+                    $language,
+                    $content,
+                    $e.html_url,
+                    $rawUrl,
+                    $e.public,
+                    $e.created_at,
+                    $e.updated_at
+                )
+
+                $resultSet.Add($gistObj) | Out-Null
             }
 
             return $resultSet
