@@ -25,7 +25,8 @@ Find a gist
         if (-not [String]::IsNullOrEmpty($SearchString)) {
             Write-Verbose "Attempting to locate gist by search string: ${SearchString}"
             $query = $gists | Where-Object {
-                $_.Description -match $SearchString
+                $_.Description -match $SearchString -or
+                ($_.Files | Get-Member -Type NoteProperty | Select-Object -ExpandProperty Name) -match $SearchString
             }
         } else {
             Write-Verbose "Attempting to locate gist by Id: ${GistId}"
@@ -37,8 +38,9 @@ Find a gist
         if ($null -ne $query) {
             $resultSet = [System.Collections.ArrayList]@()
             foreach ($e in $query) {
-                $filename = $e.Files | gm -Type NoteProperty | select -ExpandProperty Name
+                $filename = $e.Files | Get-Member -Type NoteProperty | Select-Object -ExpandProperty Name
                 $rawUrl = $e.Files.$filename.raw_url
+                $language = $e.Files.$filename.language
                 $tmpOut = Join-Path $env:TEMP $filename
 
                 $iwrParams = @{
@@ -61,11 +63,18 @@ Find a gist
 
                 $content = Get-Content $tmpOut
                 $obj = [pscustomobject] @{
+                    Id = $e.id
                     Name = $filename
+                    Language = $language
                     Content = $content
-                }
+                    Url = $e.html_url
+                    rawUrl = $rawUrl
+                    Public = $e.public
+                    CreatedAt = $e.created_at
+                    UpdatedAt = $e.updated_at
 
-                $resultSet.Add($obj);
+                }
+                $resultSet.Add($obj) | Out-Null
             }
 
             return $resultSet
