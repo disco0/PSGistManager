@@ -28,13 +28,15 @@ $export = @{
         'ghbrowser'
         )
     Function = @(
-        'Get-GHGists',
-        'New-GHGist',
-        'Set-GHToken',
-        'Set-GHBrowser',
-        'Find-GHGist',
-        'Remove-GHGist',
-        'Get-GHContentByUrl'
-        )
+    'Find-GHGistByCondition',
+    'Find-GHGistById'
+    'Get-GHContentByUrl',
+    'Get-GHGists',
+    'Initialize-GHGistObject',
+    'New-GHGist',
+    'Remove-GHGist',
+    'Set-GHBrowser',
+    'Set-GHToken'
+    )
 }
 Export-ModuleMember @export

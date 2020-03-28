@@ -2,6 +2,12 @@ function Get-GHContentByUrl {
 <#
 .SYNOPSIS
 Download the raw contents of a gist using its (raw) URL
+.INPUTS
+'raw_url' property from a Github gist api response
+.OUTPUTS
+'content' property containing the actual gist contents
+.NOTES
+This is a public function, but most users should not have to use it very often
 #>
     [CmdletBinding()]
     param (

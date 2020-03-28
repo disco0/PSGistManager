@@ -12,7 +12,7 @@
 RootModule = 'PSGistManager.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.3.0'
+ModuleVersion = '0.4.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desk', 'Core')
@@ -70,13 +70,15 @@ PowerShellVersion = '5.1'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    'Set-GHToken',
-    'Get-GHGists',
+    'Find-GHGistByCondition',
+    'Find-GHGistById'
     'Get-GHContentByUrl',
+    'Get-GHGists',
+    'Initialize-GHGistObject',
     'New-GHGist',
-    'Find-GHGist',
     'Remove-GHGist',
-    'Set-GHBrowser'
+    'Set-GHBrowser',
+    'Set-GHToken'
     )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -100,14 +102,16 @@ AliasesToExport = '*'
 
 # List of all files packaged with this module
 FileList = @(
-    'lib\Gist.ps1',
+    'lib\Find-GHGistByCondition.ps1',
+    'lib\Find-GHGistById.ps1'
+    'lib\Get-GHContentByUrl.ps1',
     'lib\Get-GHGists.ps1',
+    'lib\Gist.ps1',
+    'lib\Initialize-GHGistObject.ps1',
     'lib\New-GHGist.ps1',
-    'lib\Set-GHToken.ps1',
-    'lib\Find-GHGist.ps1',
     'lib\Remove-GHGist.ps1'
     'lib\Set-GHBrowser.ps1',
-    'lib\Get-GHContentByUrl.ps1'
+    'lib\Set-GHToken.ps1'
     )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.

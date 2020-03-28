@@ -2,10 +2,13 @@ function Get-GHGists {
 <#
 .SYNOPSIS
 Return all gists for the authenticated user
+.OUTPUTS
+A collection of Gist objects
 #>
     [CmdletBinding()]
     param ()
     $ErrorActionPreference = 'Stop'
+    $WarningPreference = 'Continue'
     $InformationPreference = 'Continue'
 
     $uri = "${script:ghserver}/gists"
@@ -27,9 +30,31 @@ Return all gists for the authenticated user
     try {
         $result = Invoke-RestMethod @params
 
-        return $result
     }
     catch {
-        Write-Error "$PSItem"
+        Write-Error "${PSItem.Exception.Message}"
     }
+
+    $resultSet = [System.Collections.ArrayList] @()
+    foreach ($r in $result) {
+        $gist = $null
+        try
+        {
+            $gist = Initialize-GHGistObject -resultData $r -Debug
+        }
+        catch
+        {
+            Write-Warning "${PSItem.Exception.Message}"
+        }
+
+        if ($null -ne $gist) {
+            $resultSet.Add($gist) | Out-Null
+        }
+        else {
+            Write-Warning "Gist is empty!"
+            $r
+        }
+    }
+
+    return $resultSet
 }

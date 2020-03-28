@@ -2,29 +2,36 @@ function New-GHGist {
 <#
 .SYNOPSIS
 Add a new Gist
+.EXAMPLE
+New-GHGist -Description "VSCode settings file" -ContentPath .\settings.json -Public
+.EXAMPLE
+New-GHGist -Description "Vimrc" -Content $vimrcData -Filename '.vimrc'
+.NOTES
+Use -Verbose to view parameter values in console
 #>
     [CmdletBinding()]
     param (
-        # Description
+        # Description of this gist
         [Parameter(Mandatory=$true,Position=0)]
         [string]
         $Description,
 
         # File name
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true,ParameterSetName='ContentFromString')]
         [string]
         $Filename,
 
-        # Gist Content
+        # Get the gist content from a string object
         [Parameter(Mandatory=$true,ParameterSetName='ContentFromString')]
         [string]
         $Content,
 
-        # Gist Content from file
+        # Load the gist content from a file. Existing filename will be used
         [Parameter(Mandatory=$true,ParameterSetName='ContentFromFile')]
         [string]
         $ContentPath,
 
+        # Use this switch to enable public visibility
         [switch]
         $Public = $false
     )
@@ -33,6 +40,7 @@ Add a new Gist
 
     if (Test-Path $ContentSrc) {
         $Content = Get-Content $ContentSrc
+        $Filename = Split-Path $ContentPath -Leaf
     }
 
     $obj = [pscustomobject] @{
