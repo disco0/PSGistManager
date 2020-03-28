@@ -99,7 +99,7 @@ class Gist
 
     OpenGithubPage()
     {
-        Start-Process 'C:\Program Files\Firefox Developer Edition\firefox.exe' "$($this.Url)"
+        Start-Process $script:ghbrowser "$($this.Url)"
     }
 
 }

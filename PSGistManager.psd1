@@ -69,14 +69,25 @@ PowerShellVersion = '5.1'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @("Set-GHToken", 'Get-GHGists',
-    'New-GHGist', 'Find-GHGist', 'Remove-GHGist')
+FunctionsToExport = @(
+    'Set-GHToken',
+    'Get-GHGists',
+    'Get-GHContentByUrl',
+    'New-GHGist',
+    'Find-GHGist',
+    'Remove-GHGist',
+    'Set-GHBrowser'
+    )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
 
 # Variables to export from this module
-VariablesToExport = @('ghserver', 'ghtoken')
+VariablesToExport = @(
+    'ghserver',
+    'ghtoken',
+    'ghbrowser'
+    )
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = '*'
@@ -88,8 +99,16 @@ AliasesToExport = '*'
 #ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @('Functions\Get-GHGists.ps1', 'Functions\New-GHGist.ps1',
-    'Functions\Set-GHToken.ps1', 'Functions\Find-GHGist.ps1', 'Functions\Remove-GHGist.ps1')
+FileList = @(
+    'lib\Gist.ps1',
+    'lib\Get-GHGists.ps1',
+    'lib\New-GHGist.ps1',
+    'lib\Set-GHToken.ps1',
+    'lib\Find-GHGist.ps1',
+    'lib\Remove-GHGist.ps1'
+    'lib\Set-GHBrowser.ps1',
+    'lib\Get-GHContentByUrl.ps1'
+    )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{

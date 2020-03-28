@@ -1,7 +1,8 @@
 function Find-GHGist {
 <#
 .SYNOPSIS
-Find a gist
+Find a gist by searching for matching strings in its filename / description.
+Alternatively, look up single gist with its known Id
 #>
     [CmdletBinding()]
     param (
@@ -41,27 +42,8 @@ Find a gist
                 $filename = $e.Files | Get-Member -Type NoteProperty | Select-Object -ExpandProperty Name
                 $rawUrl = $e.Files.$filename.raw_url
                 $language = $e.Files.$filename.language
-                $tmpOut = Join-Path $env:TEMP $filename
 
-                $iwrParams = @{
-                    Uri = $rawUrl
-                    Headers = @{Authorization = "Bearer ${script:ghtoken}"}
-                    Outfile = $tmpOut
-                    Method = 'GET'
-                }
-
-                if (Test-Path $tmpOut) {
-                    Remove-Item -Path $tmpOut -Force | Out-Null
-                }
-
-                try {
-                    Invoke-WebRequest  @iwrParams | Out-Null
-                }
-                catch {
-                    Write-Warning "$PSItem"
-                }
-
-                $content = Get-Content $tmpOut
+                $content = Get-GHContentByUrl -Url $rawUrl
 
                 $gistObj = [Gist]::new(
                     [string]$e.Id,
