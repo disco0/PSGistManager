@@ -1,8 +1,16 @@
-Get-ChildItem "$PSScriptRoot\Functions" -Recurse -Filter *.ps1 | ForEach-Object {
+Get-ChildItem "$PSScriptRoot\lib" -Recurse -Filter *.ps1 | ForEach-Object {
     . $_.FullName
 }
 
 $script:ghtoken = Get-Secret -Name GithubFullToken -AsPlainText
+if ([String]::IsNullOrEmpty($script:ghtoken)) {
+    if ([String]::IsNullOrEmpty($env:ghtoken)) {
+        Write-Error "No Github Api Token Found! Set environment variable : 'ghtoken'"
+    } else {
+        $script:ghtoken = $env:ghtoken
+    }
+}
+
 $script:ghserver = 'https://api.github.com'
 
 
