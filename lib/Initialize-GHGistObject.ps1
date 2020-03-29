@@ -18,10 +18,10 @@ This is a public function, but most users should not have cause to use this cmdl
 
     if ([String]::IsNullOrEmpty($resultData.Files.$Filename.raw_url)) {
         $gistUrl = $resultData.url
-        Write-Debug "Using 'url' property: $gistUrl"
+        Write-Verbose "Using 'url' property: $gistUrl"
     } else {
         $gistUrl = $resultData.Files.$filename.raw_url
-        Write-Debug "Using 'raw_url' property: $gistUrl"
+        Write-Verbose "Using 'raw_url' property: $gistUrl"
     }
 
     $content = $null
