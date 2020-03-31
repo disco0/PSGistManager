@@ -11,7 +11,7 @@ $gist = Find-GHGistById -Id '400b1fb65c1190aaf812f156340b47b5'
     [CmdletBinding()]
     param (
         # Gist ID
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true,Position=0)]
         [string]
         $Id,
 

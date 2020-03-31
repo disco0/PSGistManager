@@ -17,17 +17,17 @@ Use -Verbose to view parameter values in console
         $Description,
 
         # File name
-        [Parameter(Mandatory=$true,ParameterSetName='ContentFromString')]
+        [Parameter(Mandatory=$true,Position=1,ParameterSetName='ContentFromString')]
         [string]
         $Filename,
 
         # Get the gist content from a string object
-        [Parameter(Mandatory=$true,ParameterSetName='ContentFromString')]
+        [Parameter(Mandatory=$true,Position=2,ParameterSetName='ContentFromString')]
         [string]
         $Content,
 
         # Load the gist content from a file. Existing filename will be used
-        [Parameter(Mandatory=$true,ParameterSetName='ContentFromFile')]
+        [Parameter(Mandatory=$true,Position=1,ParameterSetName='ContentFromFile')]
         [string]
         $ContentPath,
 

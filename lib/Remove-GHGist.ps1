@@ -6,7 +6,7 @@ Delete a single Gist
     [CmdletBinding()]
     param (
         # Gist Id
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true,Position=0)]
         [string]
         $Id
     )

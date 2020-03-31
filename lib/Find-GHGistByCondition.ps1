@@ -9,7 +9,7 @@ Gist object
     [CmdletBinding()]
     param (
         # Search Param
-        [Parameter(Mandatory=$true,ParameterSetName='BySearchString')]
+        [Parameter(Mandatory=$true,Position=0,ParameterSetName='BySearchString')]
         [string]
         $SearchString
     )

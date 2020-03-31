@@ -12,7 +12,7 @@ This is a public function, but most users should not have to use it very often
     [CmdletBinding()]
     param (
         # URL to raw file
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true,Position=0)]
         [string]
         $url
     )
